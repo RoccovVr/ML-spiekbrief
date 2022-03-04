@@ -54,6 +54,6 @@ classifier.score(X_test, y_test) #or
 cv_scores = cross_val_score(classifier, X, y, cv=5)       #does CV on whole dataset X,y and gives scores
 
 
-# Print best parameters and corresponding score
+#Print best parameters and corresponding score
 print(grid.best_params_)
 print(grid.best_score_)
