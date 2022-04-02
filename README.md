@@ -1,3 +1,4 @@
+#---------------------------
 #machine-learning
 
 #imports
@@ -92,3 +93,9 @@ le = preprocessing.LabelEncoder()
 y_transform = le.fit_transform(y) #when y is a target variable with names
 
 #be aware of missing values, remove them or inpute
+#checking for nb of NaN values per row:
+df.isnull().sum().to_frame()
+
+#check if dataset is unbalanced:
+df.response.value_counts() #response is name of target var
+#if so, use stratify in the train test split
