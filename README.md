@@ -98,4 +98,18 @@ df.isnull().sum().to_frame()
 
 #check if dataset is unbalanced:
 df.response.value_counts() #response is name of target var
+sns.histplot(df.target) 
 #if so, use stratify in the train test split
+
+#----------------------------------------------
+#unbalanced datasets
+
+#use stratify
+
+#option is gridsearchCV adaption with scoring = roc-auc : 
+grid = RandomizedSearchCV(
+    pipe, 
+    param_distributions=param_grid, 
+    cv=5,
+    scoring="roc_auc",
+)
