@@ -99,7 +99,7 @@ df.isnull().sum().to_frame()
 #check if dataset is unbalanced:
 df.response.value_counts() #response is name of target var
 sns.histplot(df.target) 
-#if so, use stratify in the train test split
+#if so, use stratify in the train test split, and see next section Unbalanced dataset
 
 #----------------------------------------------
 #unbalanced datasets
@@ -113,3 +113,10 @@ grid = RandomizedSearchCV(
     cv=5,
     scoring="roc_auc",
 )
+
+#confusion matrix, see 
+#https://www.stackvidhya.com/plot-confusion-matrix-in-python-and-why/#:~:text=Plot%20Confusion%20Matrix%
+#20for%20Binary%20
+#Classes%20With%20Labels&text=You%20need%20to%20create%20a,matrix%20with%20the%20labels%20annotation.
+
+
