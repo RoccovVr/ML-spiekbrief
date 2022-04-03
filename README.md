@@ -58,7 +58,35 @@ print(grid.best_params_)
 print(grid.best_score_)
 
 #-----------------------------------
+#feature selection:
+from feature_engine.selection import DropCorrelatedFeatures
+from sklearn.model_selection import train_test_split  
+import pandas as pd
+import seaborn as sns
+from sklearn import neighbors  
 
+df = sns.load_dataset("iris")
+
+X = df.drop(['species'], axis=1)
+y = df['species']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=0)
+
+print("The shape of X_train is currently of size:{}".format(X_train.shape))
+print("The shape of X_test is currently of size:{}".format(X_test.shape))
+
+tr = DropCorrelatedFeatures(threshold=0.5)
+
+X_train = tr.fit_transform(X_train) #X_train with remaining columns after seeing correlations within X_train
+
+print("Now the X_train is of shape:{}".format(X_train.shape))
+
+X_test = X_test.drop(tr.features_to_drop_, axis=1) #X_test with same remaining columns as those in X_train
+
+print("Now the X_test is of shape:{}".format(X_test.shape))
+
+
+#------------------------------------
 #dimreduction:
 #if high-dim, then use kernelPCA, otherwise PCA
 
@@ -118,5 +146,6 @@ grid = RandomizedSearchCV(
 #https://www.stackvidhya.com/plot-confusion-matrix-in-python-and-why/#:~:text=Plot%20Confusion%20Matrix%
 #20for%20Binary%20
 #Classes%20With%20Labels&text=You%20need%20to%20create%20a,matrix%20with%20the%20labels%20annotation.
+
 
 
